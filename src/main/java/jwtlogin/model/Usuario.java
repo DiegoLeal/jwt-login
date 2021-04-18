@@ -30,27 +30,36 @@ public class Usuario implements UserDetails {
     private String senha;
 
     @Enumerated(EnumType.STRING)
-    private UsuarioRole UsuarioRole;
+    private UsuarioRole usuarioRole;
 
-    private Boolean locked;
+    private Boolean locked = false;
 
-    private Boolean enabled;
+    private Boolean enabled = false;
+
+    public Usuario(String nome,
+                   String email,
+                   String senha,
+                   UsuarioRole usuarioRole) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.usuarioRole = usuarioRole;
+    }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(UsuarioRole.name());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuarioRole.name());
         return Collections.singletonList(authority);
     }
 
     @Override
-    public String getPassword() {
-        return senha;
+    public String getPassword() {return getSenha();
     }
 
     @Override
     public String getUsername() {
-        return email;
+        return getEmail();
     }
 
     @Override

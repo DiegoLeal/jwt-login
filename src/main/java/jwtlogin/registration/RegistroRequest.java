@@ -11,6 +11,8 @@ import lombok.ToString;
 @AllArgsConstructor
 public class RegistroRequest {
 
+    private final String nome;
+
     private final String email;
 
     private final String senha;
